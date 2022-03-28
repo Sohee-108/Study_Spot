@@ -52,14 +52,28 @@ const MenuText = styled.Text`
   color: ${props => props.theme.textColor};
 `;
 
-const LapsText = styled.Text`
-  font-size: 40px;
+const LapsView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-bottom-width: 0.3px;
+  border-color: ${props => props.theme.menuBorderBottom};
+`;
+
+const LapsIdText = styled.Text`
+  font-size: 20px;
   line-height: 45px;
   letter-spacing: 1px;
-  width: 175px;
-  align-items: center;
-  justify-content: center;
-  margin-left: 25%;
+`;
+
+const LapsText = styled.Text`
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  width: 200px;
 `;
 
 //StopWatch Style Component
@@ -125,22 +139,17 @@ const StopWatchAPI = () => {
     console.log(laps);
   };
 
-  const data = [
-    {
-      id: '1',
-      title: laps[0],
-    },
-    {
-      id: '2',
-      title: laps[1],
-    },
-    {
-      id: '3',
-      title: laps[2],
-    },
-  ];
+  const data = [];
+  for (let i = 0; i < laps.length; i++) {
+    data.push({id: i + 1, laps: laps[i]});
+  }
 
-  const lapslist = ({item}) => <LapsText>{item.title}</LapsText>;
+  const lapslist = ({item}) => (
+    <LapsView>
+      <LapsIdText>Laps {item.id}</LapsIdText>
+      <LapsText>{item.laps}</LapsText>
+    </LapsView>
+  );
 
   return (
     <CenteredView>
@@ -181,8 +190,7 @@ const StopWatchAPI = () => {
       </ButtonView>
       <FlatList
         style={{
-          borderWidth: 1,
-          width: 300,
+          width: 380,
           height: 120,
         }}
         data={data}

@@ -26,7 +26,7 @@ const LogoImage = styled.Image`
 `;
 // #endregion
 
-const LoginScreen = ({}) => {
+const LoginScreen = () => {
   const {googleLogin} = useContext(AuthContext);
 
   return (

@@ -39,7 +39,11 @@ const SettingStack = () => {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Setting" component={Setting} />
+      <Stack.Screen
+        name="Setting"
+        component={Setting}
+        options={isLight ? settingLightOptions : settingDarkOptions}
+      />
       <Stack.Screen
         name="Support"
         component={Support}

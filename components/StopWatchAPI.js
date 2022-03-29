@@ -67,6 +67,7 @@ const LapsIdText = styled.Text`
   font-size: 20px;
   line-height: 45px;
   letter-spacing: 1px;
+  color: ${props => props.theme.textColor};
 `;
 
 const LapsText = styled.Text`
@@ -74,6 +75,7 @@ const LapsText = styled.Text`
   font-weight: 700;
   letter-spacing: 2px;
   width: 200px;
+  color: ${props => props.theme.textColor};
 `;
 
 //StopWatch Style Component

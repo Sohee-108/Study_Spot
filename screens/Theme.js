@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import ThemeMunu from '../components/ThemeMenu';
 
-// #region styled-component 부분
+const Theme = () => {
+  return (
+    <CenteredView>
+      <ThemeMunu />
+    </CenteredView>
+  );
+};
 
+export default Theme;
+
+// #region styled-component
 const CenteredView = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: ${props => props.theme.backgroundColor};
 `;
-
 // #endregion
-const Theme = () => {
-  return <CenteredView></CenteredView>;
-};
-
-export default Theme;

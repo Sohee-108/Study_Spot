@@ -17,7 +17,7 @@ const SettingStack = () => {
     },
     headerTitleStyle: {
       fontWeight: 'bold',
-      color: '#ffffff',
+      color: '#313131',
     },
     headerBackTitleVisible: false,
     headerBackButtonMenuEnabled: false,
@@ -30,7 +30,7 @@ const SettingStack = () => {
     },
     headerTitleStyle: {
       fontWeight: 'bold',
-      color: '#313131',
+      color: '#ffffff',
     },
     headerBackTitleVisible: false,
     headerBackButtonMenuEnabled: false,

@@ -9,6 +9,8 @@ import {LogBox} from 'react-native';
 //react-native-gesture-handler 업데이트 메시지 무시
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
+  'Cannot update a component (`StopWatchAPI`) while rendering a different component (`StopWatch`).',
+  'componentWillReceiveProps has been renamed, and is not recommended for use.',
 ]);
 
 const App = () => {

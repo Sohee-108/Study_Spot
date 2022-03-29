@@ -1,6 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const GoogleLoginButton = ({...rest}) => {
+  return (
+    <GoogleSigninButton {...rest}>
+      <GoogleIcon source={require('../assets/googleIcon.png')} />
+      <GoogleText>sign-in with google</GoogleText>
+    </GoogleSigninButton>
+  );
+};
+
+export default GoogleLoginButton;
+
 // #region styled-component 부분
 const GoogleSigninButton = styled.TouchableOpacity`
   align-items: center;
@@ -27,14 +38,3 @@ const GoogleText = styled.Text`
   color: ${props => props.theme.loginButtonTextColor};
 `;
 // #endregion
-
-const GoogleLoginButton = ({...rest}) => {
-  return (
-    <GoogleSigninButton {...rest}>
-      <GoogleIcon source={require('../assets/googleIcon.png')} />
-      <GoogleText>sign-in with google</GoogleText>
-    </GoogleSigninButton>
-  );
-};
-
-export default GoogleLoginButton;

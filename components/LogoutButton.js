@@ -3,6 +3,27 @@ import styled from 'styled-components';
 import {useColorScheme} from 'react-native';
 import {AuthContext} from '../navigation/AuthProvider';
 
+const LogoutButton = () => {
+  const isLight = useColorScheme() === 'light';
+  const {logout} = useContext(AuthContext);
+
+  return (
+    <Logout onPress={logout}>
+      <LogoutIcon
+        source={
+          isLight
+            ? require('../assets/icon/lightmode/logoutBlack.png')
+            : require('../assets/icon/darkmode/logoutWhite.png')
+        }
+      />
+      <LogoutText>Logout</LogoutText>
+      <VerText>version 1.0</VerText>
+    </Logout>
+  );
+};
+
+export default LogoutButton;
+
 // #region styled-component 부분
 const Logout = styled.TouchableOpacity`
   flex-direction: row;
@@ -44,24 +65,3 @@ const VerText = styled.Text`
   color: ${props => props.theme.versionText};
 `;
 // #endregion
-
-const LogoutButton = () => {
-  const isLight = useColorScheme() === 'light';
-  const {logout} = useContext(AuthContext);
-
-  return (
-    <Logout onPress={logout}>
-      <LogoutIcon
-        source={
-          isLight
-            ? require('../assets/icon/lightmode/logoutBlack.png')
-            : require('../assets/icon/darkmode/logoutWhite.png')
-        }
-      />
-      <LogoutText>Logout</LogoutText>
-      <VerText>version 1.0</VerText>
-    </Logout>
-  );
-};
-
-export default LogoutButton;

@@ -5,130 +5,6 @@ import {Agenda, Calendar} from 'react-native-calendars';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-community/async-storage';
 
-// #region styled-component 부분
-
-const CalendarView = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${props => props.theme.backgroundColor};
-`;
-
-const AgendaView = styled.View`
-  background-color: ${props => props.theme.backgroundColor};
-  justify-content: center;
-  align-items: flex-start;
-  width: 90%;
-  height: 75px;
-  padding-left: 5%;
-  margin-top: 5%;
-  border-radius: 30px;
-  border-width: 0.7px;
-  border-color: ${props => props.theme.textColor};
-`;
-
-const EmptyView = styled.View`
-  background-color: ${props => props.theme.backgroundColor};
-  justify-content: center;
-  align-items: center;
-  border-radius: 30px;
-  border-width: 0.7px;
-  margin-top: 5%;
-  margin-left: 5%;
-  width: 90%;
-  height: 75px;
-  border-color: ${props => props.theme.textColor};
-`;
-
-const EmptyText = styled.Text`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: center;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  color: ${props => props.theme.textColor};
-`;
-
-const SceduleBtn = styled.TouchableOpacity`
-  justify-content: center;
-  padding: 10px;
-`;
-
-const ScheduleTitle = styled.Text`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  color: ${props => props.theme.textColor};
-`;
-
-const ScheduleContent = styled.Text`
-  margin-left: 2%;
-  margin-top: 2%;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  color: ${props => props.theme.textColor};
-`;
-
-const AddButton1 = styled.TouchableOpacity`
-  position: absolute;
-  width: 70px;
-  height: 50px;
-  left: 72%;
-  top: 92%;
-  align-items: center;
-  justify-content: center;
-  margin-right: 5%;
-  margin-bottom: 10%;
-`;
-
-const AddImage = styled.Image`
-  width: 50px;
-  height: 50px;
-`;
-
-const AddScheduleView = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-const AddButton2 = styled.TouchableOpacity`
-  width: 150px;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  background-color: ${props => props.theme.basicColor};
-  margin-top: 10px;
-`;
-
-const AddText = styled.Text`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  color: ${props => props.theme.textColor};
-`;
-
-const AddValue = styled.TextInput`
-  background-color: ${props => props.theme.backgroundColor};
-  font-size: 16px;
-  width: 80%;
-  height: 7%;
-  border-radius: 30px;
-  padding: 5%;
-  padding-left: 15%;
-  margin-bottom: 30px;
-  color: ${props => props.theme.textColor};
-`;
-
-// #endregion
-
 const Schedule = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [scheduleList, setScheduleList] = useState({});
@@ -360,3 +236,125 @@ const Schedule = () => {
 };
 
 export default Schedule;
+
+// #region styled-component 부분
+const CalendarView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${props => props.theme.backgroundColor};
+`;
+
+const AgendaView = styled.View`
+  background-color: ${props => props.theme.backgroundColor};
+  justify-content: center;
+  align-items: flex-start;
+  width: 90%;
+  height: 75px;
+  padding-left: 5%;
+  margin-top: 5%;
+  border-radius: 30px;
+  border-width: 0.7px;
+  border-color: ${props => props.theme.textColor};
+`;
+
+const EmptyView = styled.View`
+  background-color: ${props => props.theme.backgroundColor};
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  border-width: 0.7px;
+  margin-top: 5%;
+  margin-left: 5%;
+  width: 90%;
+  height: 75px;
+  border-color: ${props => props.theme.textColor};
+`;
+
+const EmptyText = styled.Text`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: ${props => props.theme.textColor};
+`;
+
+const SceduleBtn = styled.TouchableOpacity`
+  justify-content: center;
+  padding: 10px;
+`;
+
+const ScheduleTitle = styled.Text`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: ${props => props.theme.textColor};
+`;
+
+const ScheduleContent = styled.Text`
+  margin-left: 2%;
+  margin-top: 2%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: ${props => props.theme.textColor};
+`;
+
+const AddButton1 = styled.TouchableOpacity`
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  left: 72%;
+  top: 92%;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+  margin-bottom: 10%;
+`;
+
+const AddImage = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
+
+const AddScheduleView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+const AddButton2 = styled.TouchableOpacity`
+  width: 150px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: ${props => props.theme.basicColor};
+  margin-top: 10px;
+`;
+
+const AddText = styled.Text`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: ${props => props.theme.textColor};
+`;
+
+const AddValue = styled.TextInput`
+  background-color: ${props => props.theme.backgroundColor};
+  font-size: 16px;
+  width: 80%;
+  height: 7%;
+  border-radius: 30px;
+  padding: 5%;
+  padding-left: 15%;
+  margin-bottom: 30px;
+  color: ${props => props.theme.textColor};
+`;
+// #endregion

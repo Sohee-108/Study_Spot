@@ -4,6 +4,106 @@ import {useColorScheme} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {Stopwatch} from 'react-native-stopwatch-timer';
 
+const StopWatchAPI = () => {
+  const isLight = useColorScheme() === 'light';
+
+  const [start, setStart] = useState(false);
+  const [reset, setReset] = useState(false);
+  const [laps, setLaps] = useState([]);
+  const [currentTime, setCurrentTime] = useState();
+
+  const toggleStopwatch = () => {
+    setStart(!start);
+    setReset(false);
+  };
+
+  const resetStopwatch = () => {
+    setStart(false);
+    setReset(true);
+    lapsClear();
+  };
+
+  const lapsStopwatch = () => {
+    if (start == 'start' || currentTime == '00:00:00:000') {
+      console.log('스탑워치를 시작해주세요!');
+    } else {
+      console.log('currentTime: ', currentTime);
+      laps.push(currentTime);
+      setLaps(laps);
+      console.log(laps);
+    }
+  };
+
+  const lapsClear = () => {
+    setLaps([]);
+    console.log(laps);
+  };
+
+  const data = [];
+  for (let i = 0; i < laps.length; i++) {
+    data.push({id: i + 1, laps: laps[i]});
+  }
+
+  const lapslist = ({item}) => (
+    <LapsView>
+      <LapsIdText>Laps {item.id}</LapsIdText>
+      <LapsText>{item.laps}</LapsText>
+    </LapsView>
+  );
+
+  return (
+    <CenteredView>
+      <StopwatchView>
+        <Stopwatch
+          laps
+          msecs
+          start={start}
+          reset={reset}
+          options={isLight ? lightoptions : darkoptions}
+          getTime={time => {
+            if (time != currentTime) {
+              setCurrentTime(time);
+            }
+          }}
+        />
+        <WatchText style={{left: 411}}>hour</WatchText>
+        <WatchText style={{left: 482}}>minute</WatchText>
+        <WatchText style={{left: 557}}>second</WatchText>
+        <WatchText style={{left: 637}}>millisecond</WatchText>
+      </StopwatchView>
+
+      <ButtonView>
+        <MenuButton onPress={toggleStopwatch}>
+          <MenuText>{!start ? 'Start' : 'Stop'}</MenuText>
+        </MenuButton>
+        <MenuButton onPress={resetStopwatch}>
+          <MenuText>Reset</MenuText>
+        </MenuButton>
+      </ButtonView>
+      <ButtonView>
+        <MenuButton onPress={lapsStopwatch}>
+          <MenuText>Laps</MenuText>
+        </MenuButton>
+        <MenuButton onPress={lapsClear}>
+          <MenuText>Clear</MenuText>
+        </MenuButton>
+      </ButtonView>
+      <FlatList
+        style={{
+          width: 380,
+          height: 120,
+        }}
+        data={data}
+        renderItem={lapslist}
+        keyExtractor={item => item.id}
+        disableVirtualization={false}
+      />
+    </CenteredView>
+  );
+};
+
+export default StopWatchAPI;
+
 // #region styled-component 부분
 const CenteredView = styled.SafeAreaView`
   flex: 1;
@@ -105,103 +205,3 @@ const darkoptions = {
   },
 };
 // #endregion
-
-const StopWatchAPI = () => {
-  const isLight = useColorScheme() === 'light';
-
-  const [start, setStart] = useState(false);
-  const [reset, setReset] = useState(false);
-  const [laps, setLaps] = useState([]);
-  const [currentTime, setCurrentTime] = useState();
-
-  const toggleStopwatch = () => {
-    setStart(!start);
-    setReset(false);
-  };
-
-  const resetStopwatch = () => {
-    setStart(false);
-    setReset(true);
-    lapsClear();
-  };
-
-  const lapsStopwatch = () => {
-    if (start == 'start' || currentTime == '00:00:00:000') {
-      console.log('스탑워치를 시작해주세요!');
-    } else {
-      console.log('currentTime: ', currentTime);
-      laps.push(currentTime);
-      setLaps(laps);
-      console.log(laps);
-    }
-  };
-
-  const lapsClear = () => {
-    setLaps([]);
-    console.log(laps);
-  };
-
-  const data = [];
-  for (let i = 0; i < laps.length; i++) {
-    data.push({id: i + 1, laps: laps[i]});
-  }
-
-  const lapslist = ({item}) => (
-    <LapsView>
-      <LapsIdText>Laps {item.id}</LapsIdText>
-      <LapsText>{item.laps}</LapsText>
-    </LapsView>
-  );
-
-  return (
-    <CenteredView>
-      <StopwatchView>
-        <Stopwatch
-          laps
-          msecs
-          start={start}
-          reset={reset}
-          options={isLight ? lightoptions : darkoptions}
-          getTime={time => {
-            if (time != currentTime) {
-              setCurrentTime(time);
-            }
-          }}
-        />
-        <WatchText style={{left: 411}}>hour</WatchText>
-        <WatchText style={{left: 482}}>minute</WatchText>
-        <WatchText style={{left: 557}}>second</WatchText>
-        <WatchText style={{left: 637}}>millisecond</WatchText>
-      </StopwatchView>
-
-      <ButtonView>
-        <MenuButton onPress={toggleStopwatch}>
-          <MenuText>{!start ? 'Start' : 'Stop'}</MenuText>
-        </MenuButton>
-        <MenuButton onPress={resetStopwatch}>
-          <MenuText>Reset</MenuText>
-        </MenuButton>
-      </ButtonView>
-      <ButtonView>
-        <MenuButton onPress={lapsStopwatch}>
-          <MenuText>Laps</MenuText>
-        </MenuButton>
-        <MenuButton onPress={lapsClear}>
-          <MenuText>Clear</MenuText>
-        </MenuButton>
-      </ButtonView>
-      <FlatList
-        style={{
-          width: 380,
-          height: 120,
-        }}
-        data={data}
-        renderItem={lapslist}
-        keyExtractor={item => item.id}
-        disableVirtualization={false}
-      />
-    </CenteredView>
-  );
-};
-
-export default StopWatchAPI;

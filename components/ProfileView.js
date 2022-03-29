@@ -2,6 +2,20 @@ import React, {useContext} from 'react';
 import styled from 'styled-components';
 import {AuthContext} from '../navigation/AuthProvider';
 
+const ProfileView = () => {
+  const {user} = useContext(AuthContext);
+
+  return (
+    <View>
+      <ProfileImage source={{uri: user.photoURL}} />
+      <ProfileName>{user.displayName}</ProfileName>
+      <ProfileEmail>{user.email}</ProfileEmail>
+    </View>
+  );
+};
+
+export default ProfileView;
+
 // #region styled-component 부분
 const View = styled.View`
   flex: 0.3;
@@ -41,17 +55,3 @@ const ProfileEmail = styled.Text`
   color: ${props => props.theme.emailText};
 `;
 // #endregion
-
-const ProfileView = () => {
-  const {user} = useContext(AuthContext);
-
-  return (
-    <View>
-      <ProfileImage source={{uri: user.photoURL}} />
-      <ProfileName>{user.displayName}</ProfileName>
-      <ProfileEmail>{user.email}</ProfileEmail>
-    </View>
-  );
-};
-
-export default ProfileView;

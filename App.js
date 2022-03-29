@@ -1,10 +1,10 @@
-import React from 'react';
-import {useColorScheme} from 'react-native';
+import React, {useEffect} from 'react';
+import {LogBox, useColorScheme} from 'react-native';
 import {ThemeProvider} from 'styled-components';
+import SplashScreen from 'react-native-splash-screen';
 
 import Provider from './navigation';
 import {darkTheme, lightTheme} from './style/ThemeMode';
-import {LogBox} from 'react-native';
 
 //react-native-gesture-handler 업데이트 메시지 무시
 LogBox.ignoreLogs([
@@ -15,6 +15,9 @@ LogBox.ignoreLogs([
 
 const App = () => {
   const isLight = useColorScheme() === 'light';
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <ThemeProvider theme={isLight ? lightTheme : darkTheme}>

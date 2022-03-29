@@ -1,7 +1,7 @@
 # Study_Spot
 공부시간 및 개인일정 관리 Application
 <p>
-📌 프로젝트가 궁금하다면 ?
+ <b>📌 프로젝트가 궁금하다면 ?</b>
 <br>‣ https://cut-zone-bf7.notion.site/StudySpot-2dea6f6a3fa84d4380d5b0df00a8ab89
  <p>
 <b>이전 github</b>

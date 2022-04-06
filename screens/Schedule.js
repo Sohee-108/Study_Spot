@@ -1,15 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Alert, useColorScheme} from 'react-native';
 import styled from 'styled-components';
-import {Agenda, Calendar} from 'react-native-calendars';
+import {Agenda} from 'react-native-calendars';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-community/async-storage';
+import firestore from '@react-native-firebase/firestore';
+
+import {AuthContext} from '../navigation/AuthProvider';
 
 const Schedule = () => {
+  const isLight = useColorScheme() === 'light';
+  const {user} = useContext(AuthContext);
+
   const [isModalVisible, setModalVisible] = useState(false);
   const [scheduleList, setScheduleList] = useState({});
-  const [deleteItem, setDeleteItem] = useState({});
-  const [currentItem, setCurrentItem] = useState({});
 
   var [id, setId] = useState(1);
   const [day, setDay] = useState('');
@@ -80,9 +84,7 @@ const Schedule = () => {
       [
         {
           text: '네',
-          onPress: () => {
-            removeValue();
-          },
+          onPress: () => console.log('예'),
         },
         {
           text: '아니오',
@@ -93,37 +95,6 @@ const Schedule = () => {
       {cancelable: false},
     );
   };
-
-  //일정 삭제
-  const removeValue = async (day, id) => {
-    var _scheduleList = {...scheduleList};
-    console.log(items);
-    // try {
-    //   if (_scheduleList.id === id && _scheduleList.day === day) {
-    //     await AsyncStorage.removeItem("@spot_key");
-
-    //     setScheduleList(scheduleList);
-    //     getData();
-    //   }
-    // } catch (e) {
-    //   // remove error
-    //   console.log("err: " + e);
-    // }
-
-    console.log('삭제완료');
-  };
-
-  const check = () => {
-    console.log(items);
-  };
-
-  const getSelectItem = () => {
-    if (items != currentItem) {
-      setCurrentItem(items);
-    }
-  };
-
-  const isLight = useColorScheme() === 'light';
 
   return (
     <CalendarView>
@@ -172,7 +143,7 @@ const Schedule = () => {
         renderItem={items => {
           return (
             <AgendaView>
-              <SceduleBtn onLongPress={getSelectItem}>
+              <SceduleBtn onLongPress={deleteAlert}>
                 <ScheduleTitle>
                   {items.name} ({items.time})
                 </ScheduleTitle>

@@ -50,6 +50,7 @@ const Setting = ({navigation}) => {
           renderItem={menuBorder}
           keyExtractor={item => item.id}
           scrollEnabled={false}
+          disableVirtualization={false}
         />
         <LogoutButton />
       </MenuView>

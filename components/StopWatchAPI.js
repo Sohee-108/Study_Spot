@@ -4,6 +4,8 @@ import {useColorScheme} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {Stopwatch} from 'react-native-stopwatch-timer';
 
+import {windowHeight, windowWidth} from '../utils/Dimentions';
+
 const StopWatchAPI = () => {
   const isLight = useColorScheme() === 'light';
 
@@ -66,10 +68,12 @@ const StopWatchAPI = () => {
             }
           }}
         />
-        <WatchText style={{left: 411}}>hour</WatchText>
-        <WatchText style={{left: 482}}>minute</WatchText>
-        <WatchText style={{left: 557}}>second</WatchText>
-        <WatchText style={{left: 637}}>millisecond</WatchText>
+        <View>
+          <WatchText style={{right: '75%'}}>hour</WatchText>
+          <WatchText style={{right: '-2%'}}>minute</WatchText>
+          <WatchText style={{right: '-63%'}}>second</WatchText>
+          <WatchText style={{right: '-121%'}}>millisecond</WatchText>
+        </View>
       </StopwatchView>
 
       <ButtonView>
@@ -113,24 +117,31 @@ const CenteredView = styled.SafeAreaView`
 `;
 
 const StopwatchView = styled.View`
-  flex: 0.4;
-  background-color: ${props => props.theme.backgroundColor};
-  align-items: center;
+  width: 350px;
+  align-content: center;
   justify-content: center;
-  padding: 3%;
-  padding-left: 100%;
-  padding-right: 100%;
+  background-color: ${props => props.theme.backgroundColor};
+`;
+
+const View = styled.View`
+  width: 300px;
+  height: 50px;
+  flex-direction: row;
+  margin-left: 20px;
+  align-content: center;
+  justify-content: center;
+  background-color: ${props => props.theme.backgroundColor};
 `;
 
 const WatchText = styled.Text`
-  position: absolute;
   font-size: 13px;
+  padding-top: 5px;
   color: ${props => props.theme.typeTextColor};
-  top: 85%;
 `;
 
 const ButtonView = styled.View`
   flex-direction: row;
+  background-color: ${props => props.theme.backgroundColor};
 `;
 
 const MenuButton = styled.TouchableOpacity`
@@ -179,29 +190,31 @@ const LapsText = styled.Text`
 `;
 
 //StopWatch Style Component
+
 const lightoptions = {
   container: {
-    width: 335,
-    height: 100,
-    justifyContent: 'center',
+    width: 350,
+    alignContent: 'center',
+    paddingTop: 5,
   },
   text: {
-    fontSize: 50,
+    fontSize: 45,
     color: '#313131',
-    letterSpacing: 2,
+    letterSpacing: 3,
+    paddingLeft: 25,
   },
 };
 
 const darkoptions = {
   container: {
-    width: 335,
-    height: 100,
-    justifyContent: 'center',
+    width: 350,
+    alignContent: 'center',
+    paddingTop: 5,
   },
   text: {
-    fontSize: 50,
+    fontSize: 45,
     color: '#ffffff',
-    letterSpacing: 2,
+    letterSpacing: 3,
   },
 };
 // #endregion

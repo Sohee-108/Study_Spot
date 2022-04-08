@@ -4,8 +4,6 @@ import {useColorScheme} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {Stopwatch} from 'react-native-stopwatch-timer';
 
-import {windowHeight, windowWidth} from '../utils/Dimentions';
-
 const StopWatchAPI = () => {
   const isLight = useColorScheme() === 'light';
 
@@ -69,10 +67,10 @@ const StopWatchAPI = () => {
           }}
         />
         <View>
-          <WatchText style={{right: '75%'}}>hour</WatchText>
-          <WatchText style={{right: '-2%'}}>minute</WatchText>
-          <WatchText style={{right: '-63%'}}>second</WatchText>
-          <WatchText style={{right: '-121%'}}>millisecond</WatchText>
+          <WatchText style={{right: '115%'}}>hour</WatchText>
+          <WatchText style={{right: '28%'}}>minute</WatchText>
+          <WatchText style={{right: '-50%'}}>second</WatchText>
+          <WatchText style={{right: '-128%'}}>millisecond</WatchText>
         </View>
       </StopwatchView>
 
@@ -118,24 +116,23 @@ const CenteredView = styled.SafeAreaView`
 
 const StopwatchView = styled.View`
   width: 350px;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   background-color: ${props => props.theme.backgroundColor};
 `;
 
 const View = styled.View`
   width: 300px;
-  height: 50px;
+  height: 40px;
+  margin-bottom: 10px;
   flex-direction: row;
-  margin-left: 20px;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   background-color: ${props => props.theme.backgroundColor};
 `;
 
 const WatchText = styled.Text`
   font-size: 13px;
-  padding-top: 5px;
   color: ${props => props.theme.typeTextColor};
 `;
 
@@ -165,8 +162,8 @@ const MenuText = styled.Text`
 
 const LapsView = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 10px;
   padding-left: 30px;
   padding-right: 30px;
@@ -194,25 +191,26 @@ const LapsText = styled.Text`
 const lightoptions = {
   container: {
     width: 350,
-    alignContent: 'center',
-    paddingTop: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 20,
   },
   text: {
-    fontSize: 45,
+    fontSize: 47,
     color: '#313131',
     letterSpacing: 3,
-    paddingLeft: 25,
   },
 };
 
 const darkoptions = {
   container: {
     width: 350,
-    alignContent: 'center',
-    paddingTop: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 20,
   },
   text: {
-    fontSize: 45,
+    fontSize: 47,
     color: '#ffffff',
     letterSpacing: 3,
   },

@@ -80,8 +80,8 @@ const MenuView = styled.View`
 
 const MenuButton = styled.TouchableOpacity`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: 18px;
   border-bottom-width: 0.3px;

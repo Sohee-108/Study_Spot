@@ -39,8 +39,8 @@ export default ThemeMunu;
 // #region styled-component 부분
 const MenuView = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 18px;

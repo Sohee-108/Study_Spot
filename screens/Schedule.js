@@ -1,16 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Alert, useColorScheme} from 'react-native';
 import styled from 'styled-components';
 import {Agenda} from 'react-native-calendars';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-community/async-storage';
-import firestore from '@react-native-firebase/firestore';
-
-import {AuthContext} from '../navigation/AuthProvider';
 
 const Schedule = () => {
   const isLight = useColorScheme() === 'light';
-  const {user} = useContext(AuthContext);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [scheduleList, setScheduleList] = useState({});
@@ -55,7 +51,7 @@ const Schedule = () => {
       getData();
       allClear();
     } catch (e) {
-      console.log('err: ' + e);
+      console.log('error: ' + e);
     }
   };
 
@@ -68,7 +64,7 @@ const Schedule = () => {
       }
     } catch (e) {
       // error reading value
-      console.log('err: ' + e);
+      console.log('error: ' + e);
     }
   };
 
@@ -76,15 +72,24 @@ const Schedule = () => {
     getData();
   }, []);
 
-  //일정 삭제 알림창
-  const deleteAlert = () => {
+  //일정 모두 삭제
+  const deleteData = () => {
     Alert.alert(
-      '삭제',
-      '일정을 삭제하시겠습니까?',
+      '삭 제',
+      '일정을 모두 삭제하시겠습니까?',
       [
         {
           text: '네',
-          onPress: () => console.log('예'),
+          onPress: async () => {
+            try {
+              await AsyncStorage.removeItem('@spot_key');
+              getData();
+              setScheduleList({});
+              console.log(scheduleList);
+            } catch (e) {
+              console.log('error' + e);
+            }
+          },
         },
         {
           text: '아니오',
@@ -137,18 +142,15 @@ const Schedule = () => {
         }
         showClosingKnob={true}
         items={scheduleList}
-        onDayChange={day => {
-          console.log(day.dateString);
-        }}
         renderItem={items => {
           return (
             <AgendaView>
-              <SceduleBtn onLongPress={deleteAlert}>
+              <ScheduleBtn>
                 <ScheduleTitle>
                   {items.name} ({items.time})
                 </ScheduleTitle>
                 <ScheduleContent>{items.content}</ScheduleContent>
-              </SceduleBtn>
+              </ScheduleBtn>
             </AgendaView>
           );
         }}
@@ -164,32 +166,43 @@ const Schedule = () => {
         }}
       />
       <AddButton1 onPress={toggleModal}>
-        <AddImage
+        <ButtonImage
           source={
             isLight
               ? require('../assets/icon/lightmode/addBlack.png')
               : require('../assets/icon/darkmode/addWhite.png')
-          }></AddImage>
+          }
+        />
       </AddButton1>
+      <DeleteBtn onPress={deleteData}>
+        <ButtonImage
+          source={
+            isLight
+              ? require('../assets/icon/lightmode/cancelBlack.png')
+              : require('../assets/icon/darkmode/cancelWhite.png')
+          }
+        />
+      </DeleteBtn>
+
       <Modal isVisible={isModalVisible}>
         <AddScheduleView>
           <AddValue
             placeholder="날짜 ex)2021-05-13"
             value={day}
-            onChangeText={setDay}></AddValue>
+            onChangeText={content => setDay(content)}></AddValue>
           <AddValue
             placeholder="일정시간 ex)17:00~20:00"
             value={time}
-            onChangeText={setTime}></AddValue>
+            onChangeText={content => setTime(content)}></AddValue>
           <AddValue
             placeholder="일정이름"
             title="name"
             value={name}
-            onChangeText={setName}></AddValue>
+            onChangeText={content => setName(content)}></AddValue>
           <AddValue
             placeholder="일정내용"
             value={content}
-            onChangeText={setContent}></AddValue>
+            onChangeText={content => setContent(content)}></AddValue>
           <AddButton2
             title="add"
             onPress={() => {
@@ -250,7 +263,7 @@ const EmptyText = styled.Text`
   color: ${props => props.theme.textColor};
 `;
 
-const SceduleBtn = styled.TouchableOpacity`
+const ScheduleBtn = styled.TouchableOpacity`
   justify-content: center;
   padding: 10px;
 `;
@@ -279,7 +292,7 @@ const AddButton1 = styled.TouchableOpacity`
   position: absolute;
   width: 70px;
   height: 50px;
-  left: 72%;
+  left: 75%;
   top: 92%;
   align-items: center;
   justify-content: center;
@@ -287,7 +300,19 @@ const AddButton1 = styled.TouchableOpacity`
   margin-bottom: 10%;
 `;
 
-const AddImage = styled.Image`
+const DeleteBtn = styled.TouchableOpacity`
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  left: 5%;
+  top: 92%;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+  margin-bottom: 10%;
+`;
+
+const ButtonImage = styled.Image`
   width: 50px;
   height: 50px;
 `;

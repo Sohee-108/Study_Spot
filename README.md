@@ -7,4 +7,4 @@
 <b>이전 github</b>
 <br>https://github.com/Sohee-108/studyspot
 <br><b>이전 github issue</b>
-<br>https://github.com/Sohee-108/studyspot/issue
+<br>https://github.com/Sohee-108/studyspot/issues
